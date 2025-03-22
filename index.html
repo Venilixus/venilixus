@@ -412,16 +412,28 @@
         .skill-chart-item {
             display: flex;
             flex-direction: column;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.2rem;
+            border: 1px solid var(--card-border);
+            transition: transform 0.3s;
+        }
+
+        .skill-chart-item:hover {
+            transform: translateY(-5px);
         }
 
         .skill-chart-label {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 5px;
+            margin-bottom: 12px;
+            border-bottom: 1px dashed var(--card-border);
+            padding-bottom: 8px;
         }
 
         .skill-chart-label strong {
             color: var(--highlight-color);
+            font-size: 1.1rem;
         }
 
         .timeline {
@@ -739,56 +751,32 @@
             <div class="skills-chart">
                 <div class="skill-chart-item">
                     <div class="skill-chart-label">
-                        <strong>AI/LLM Implementation</strong>
-                        <span>95%</span>
+                        <strong>Current Focus Areas</strong>
                     </div>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 95%;"></div>
-                    </div>
-                </div>
-                <div class="skill-chart-item">
-                    <div class="skill-chart-label">
-                        <strong>Customer Service Transformation</strong>
-                        <span>92%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 92%;"></div>
+                    <div class="skills">
+                        <span class="skill-tag">LLM-Powered Service Solutions</span>
+                        <span class="skill-tag">AI/ML Feedback Systems</span>
+                        <span class="skill-tag">Cross-Functional AI Integration</span>
                     </div>
                 </div>
                 <div class="skill-chart-item">
                     <div class="skill-chart-label">
-                        <strong>Process Optimization</strong>
-                        <span>90%</span>
+                        <strong>Core Expertise</strong>
                     </div>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 90%;"></div>
-                    </div>
-                </div>
-                <div class="skill-chart-item">
-                    <div class="skill-chart-label">
-                        <strong>PC Building</strong>
-                        <span>88%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 88%;"></div>
+                    <div class="skills">
+                        <span class="skill-tag">Customer Service Transformation</span>
+                        <span class="skill-tag">Process Optimization</span>
+                        <span class="skill-tag">Quality Management</span>
                     </div>
                 </div>
                 <div class="skill-chart-item">
                     <div class="skill-chart-label">
-                        <strong>Python (Learning)</strong>
-                        <span>35%</span>
+                        <strong>Technical Interests</strong>
                     </div>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 35%;"></div>
-                    </div>
-                </div>
-                <div class="skill-chart-item">
-                    <div class="skill-chart-label">
-                        <strong>Back-end Development (Learning)</strong>
-                        <span>25%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 25%;"></div>
+                    <div class="skills">
+                        <span class="skill-tag">Custom PC Building</span>
+                        <span class="skill-tag">Distributed Computing</span>
+                        <span class="skill-tag">Python Development</span>
                     </div>
                 </div>
             </div>
