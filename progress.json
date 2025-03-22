@@ -1,0 +1,19 @@
+{
+  "courses": [
+    {
+      "title": "Learn to Code in Python",
+      "progress": "33/161",
+      "percent": 20
+    },
+    {
+      "title": "Learn Linux",
+      "progress": "Up next",
+      "percent": 0
+    },
+    {
+      "title": "Overall Backend Journey",
+      "progress": "Just getting started!",
+      "percent": 5
+    }
+  ]
+}
