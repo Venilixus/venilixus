@@ -854,6 +854,45 @@
                 margin-right: 10px;
                 margin-bottom: 0;
             }
+            
+            .achievements-timeline {
+                margin-bottom: 60px;
+            }
+            
+            .banner {
+                padding: 1.5rem 1rem;
+            }
+            
+            .banner h2 {
+                font-size: 1.4rem;
+            }
+            
+            .banner p {
+                font-size: 1rem;
+            }
+            
+            .skills-chart {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .tab {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .company-years {
+                display: block;
+                margin-left: 0;
+                margin-top: 2px;
+            }
         }
     </style>
 </head>
@@ -1414,6 +1453,33 @@
                     backToTop.classList.remove('visible');
                 }
             });
+            
+            // Make tabs scrollable on mobile
+            const tabsContainer = document.querySelector('.tabs');
+            if (tabsContainer) {
+                const activeTab = tabsContainer.querySelector('.tab.active');
+                if (activeTab && window.innerWidth < 768) {
+                    setTimeout(() => {
+                        activeTab.scrollIntoView({
+                            behavior: 'smooth',
+                            inline: 'center',
+                            block: 'nearest'
+                        });
+                    }, 500);
+                }
+            }
+            
+            // Adjust heights for mobile
+            if (window.innerWidth < 768) {
+                const achievementsTimeline = document.querySelector('.achievements-timeline');
+                if (achievementsTimeline) {
+                    const timelineHeight = achievementsTimeline.scrollHeight;
+                    const timelineLine = achievementsTimeline.querySelector('.timeline-line');
+                    if (timelineLine) {
+                        timelineLine.style.height = `${timelineHeight}px`;
+                    }
+                }
+            }
             
             // Initialize particles.js if available
             if (typeof particlesJS !== 'undefined') {
