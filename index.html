@@ -76,6 +76,50 @@
             position: relative;
         }
 
+        .banner {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 1rem 0 3rem 0;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--mercedes-color) 0%, var(--accent-color) 100%);
+        }
+
+        .banner h2 {
+            font-size: 1.8rem;
+            color: var(--highlight-color);
+            margin-bottom: 1rem;
+        }
+
+        .banner p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .banner-highlight {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
         .theme-toggle {
             position: absolute;
             top: 10px;
@@ -732,6 +776,11 @@
             </div>
         </header>
 
+        <div class="banner">
+            <h2>Transforming Customer Service Through AI Innovation</h2>
+            <p>Leveraging <span class="banner-highlight">LLMs</span> and <span class="banner-highlight">machine learning</span> to create exceptional customer experiences while driving operational efficiency</p>
+        </div>
+
         <!-- Main Navigation -->
         <nav class="main-nav">
             <a href="#about"><i class="fas fa-user-circle"></i> About</a>
@@ -750,11 +799,11 @@
                 > const nickCoffyn = new AIEnthusiast();<br>
                 > nickCoffyn.init();
             </div>
-            <p>Tech enthusiast by night, AI innovator by day — I'm a Senior CS Product Manager at Amazon who transforms traditional customer service into intelligent, AI-powered experiences. When I'm not orchestrating LLM implementations or crafting feedback-driven AI workflows, you'll find me elbow-deep in computer hardware — building custom rigs that don't just look good; they contribute to scientific research.</p>
+            <p>With over 10 years of experience in transforming customer service operations, I currently lead AI-driven initiatives at Amazon as a Senior Product Manager. My expertise lies in implementing Large Language Models (LLMs) to enhance customer interactions, streamline support processes, and build scalable feedback systems that continuously improve AI performance.</p>
             
-            <p>Ranked #2 on Amazon's Folding@Home team, my custom-built machines form part of a global distributed computing network accelerating medical breakthroughs. This hardware obsession mirrors my professional approach: optimizing systems, eliminating inefficiencies, and pushing computational boundaries to solve real-world problems.</p>
+            <p>My unique background combines deep customer service expertise with a passion for technological innovation. This dual perspective allows me to bridge the gap between technical capabilities and real customer needs, creating solutions that deliver exceptional user experiences while driving operational efficiency.</p>
             
-            <p>My philosophy? Every process can be reimagined through the lens of AI and automation. Whether it's enhancing customer interactions with machine learning or streamlining operational workflows, I hunt inefficiencies with relentless curiosity. Currently expanding my toolkit by diving into Python and back-end development — because the architects of tomorrow's AI-powered systems need to understand what's under the hood.</p>
+            <p>I thrive on identifying opportunities for optimization and automation. My approach involves careful process analysis, cross-functional collaboration, and data-driven decision making. As I continue expanding my technical skills through Python and back-end development, I'm constantly seeking new ways to apply emerging technologies to solve complex business challenges.</p>
 
             <div class="skills-chart">
                 <div class="skill-chart-item">
@@ -762,9 +811,9 @@
                         <strong>Current Focus Areas</strong>
                     </div>
                     <div class="skills">
-                        <span class="skill-tag">LLM-Powered Service Solutions</span>
-                        <span class="skill-tag">AI/ML Feedback Systems</span>
-                        <span class="skill-tag">Cross-Functional AI Integration</span>
+                        <span class="skill-tag">LLM Implementation</span>
+                        <span class="skill-tag">AI Feedback Systems</span>
+                        <span class="skill-tag">CS Transformation</span>
                     </div>
                 </div>
                 <div class="skill-chart-item">
@@ -772,19 +821,19 @@
                         <strong>Core Expertise</strong>
                     </div>
                     <div class="skills">
-                        <span class="skill-tag">Customer Service Transformation</span>
+                        <span class="skill-tag">Product Management</span>
                         <span class="skill-tag">Process Optimization</span>
-                        <span class="skill-tag">Quality Management</span>
+                        <span class="skill-tag">Cross-Functional Leadership</span>
                     </div>
                 </div>
                 <div class="skill-chart-item">
                     <div class="skill-chart-label">
-                        <strong>Technical Interests</strong>
+                        <strong>Technical Skills</strong>
                     </div>
                     <div class="skills">
+                        <span class="skill-tag">Data Analytics</span>
                         <span class="skill-tag">Custom PC Building</span>
-                        <span class="skill-tag">Distributed Computing</span>
-                        <span class="skill-tag">Python Development</span>
+                        <span class="skill-tag">Python (Learning)</span>
                     </div>
                 </div>
             </div>
@@ -929,22 +978,22 @@
             <div class="side-interests">
                 <div class="interest-card">
                     <h3 class="interest-title"><i class="fas fa-server"></i> Hardware Enthusiast</h3>
-                    <p>Building high-performance computing rigs isn't just a hobby—it's an obsession. Ranked #2 on Amazon's Folding@Home team (donor ID: 366956), my custom-built machines contribute to a global distributed computing project that simulates protein folding to advance research on diseases like cancer and COVID-19.</p>
+                    <p>I build and optimize high-performance computing systems that contribute to scientific research. As the #2 contributor on Amazon's Folding@Home team (donor ID: 366956), my custom-built machines support global distributed computing projects advancing medical research on diseases like cancer and COVID-19.</p>
                 </div>
                 
                 <div class="interest-card">
-                    <h3 class="interest-title"><i class="fas fa-robot"></i> AI & Machine Learning</h3>
-                    <p>Exploring the frontiers of artificial intelligence and its applications in customer service. I experiment with LLMs and machine learning models to reimagine how humans and AI can collaborate to solve complex service challenges.</p>
+                    <h3 class="interest-title"><i class="fas fa-robot"></i> AI Research & Experimentation</h3>
+                    <p>Beyond my professional work, I actively explore emerging AI technologies and applications. This hands-on experimentation with LLMs and machine learning models provides valuable insights that inform my product decisions and help me identify innovative solutions to complex service challenges.</p>
                 </div>
                 
                 <div class="interest-card">
-                    <h3 class="interest-title"><i class="fas fa-code"></i> Learning Journey</h3>
-                    <p>Currently working through Boot.dev's Back-end Developer career path, methodically building my technical foundation in Python, Linux, Git, and beyond. This structured approach to learning complements my professional work with AI systems and allows me to better understand and influence the technical implementation of customer service solutions.</p>
+                    <h3 class="interest-title"><i class="fas fa-code"></i> Technical Skill Development</h3>
+                    <p>I'm currently advancing my technical foundation through Boot.dev's Back-end Developer career path, focusing on Python, Linux, Git, and related technologies. This structured learning approach enables me to better understand system architecture and communicate more effectively with engineering teams.</p>
                 </div>
                 
                 <div class="interest-card">
-                    <h3 class="interest-title"><i class="fas fa-universal-access"></i> Volunteer Translator</h3>
-                    <p>Since June 2017, I've volunteered as a translator for European Digital Rights (EDRi), translating legal and informative documents related to European Digital Rights for consumers and businesses.</p>
+                    <h3 class="interest-title"><i class="fas fa-universal-access"></i> Digital Rights Advocacy</h3>
+                    <p>Since 2017, I've volunteered as a translator for European Digital Rights (EDRi), helping translate legal and informative documents related to digital rights for consumers and businesses. This work reflects my commitment to ethical technology practices and informed digital citizenship.</p>
                 </div>
             </div>
 
