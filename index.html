@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nick Coffyn - Quality Specialist</title>
+    <style>
+        :root {
+            --primary-color: #0d1117;
+            --secondary-color: #161b22;
+            --accent-color: #4CAF50;
+            --text-color: #c9d1d9;
+            --highlight-color: #f0f6fc;
+            --card-bg: #21262d;
+            --card-border: #30363d;
+            --mercedes-color: #00D2BE;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--highlight-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .section {
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--highlight-color);
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 0.5rem;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+
+        .skill-tag {
+            background-color: var(--card-bg);
+            color: var(--accent-color);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid var(--card-border);
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--card-border);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            color: var(--highlight-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 0.8rem 0;
+        }
+
+        .experience-item {
+            margin-bottom: 2rem;
+        }
+
+        .experience-title {
+            font-size: 1.3rem;
+            color: var(--highlight-color);
+        }
+
+        .experience-company {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+        }
+
+        .experience-date {
+            font-size: 0.9rem;
+            color: #8b949e;
+            margin-bottom: 0.8rem;
+        }
+
+        .side-interests {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .interest-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid var(--card-border);
+        }
+
+        .interest-title {
+            font-size: 1.2rem;
+            color: var(--highlight-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .achievement-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--card-border);
+        }
+
+        .achievement-title {
+            font-size: 1.3rem;
+            color: var(--highlight-color);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .achievement-title i {
+            color: var(--accent-color);
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+            color: #8b949e;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background-color: var(--card-bg);
+            border-radius: 6px;
+            margin: 5px 0 15px 0;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            border-radius: 6px;
+            background-color: var(--accent-color);
+        }
+
+        .native {
+            width: 100%;
+        }
+
+        .advanced {
+            width: 85%;
+        }
+
+        .intermediate {
+            width: 65%;
+        }
+
+        .proficient {
+            width: 75%;
+        }
+
+        .mercedes-color {
+            color: var(--mercedes-color);
+        }
+
+        @media (max-width: 768px) {
+            .side-interests {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="/api/placeholder/150/150" alt="Nick Coffyn" class="profile-img">
+            <h1>NICK COFFYN</h1>
+            <p class="tagline">Senior CS Product Manager - Amazon</p>
+            <p>AI-driven customer service transformation specialist</p>
+            
+            <div class="social-links">
+                <a href="https://github.com/nickcoffyn" title="GitHub"><i class="fab fa-github"></i> GitHub</a>
+                <a href="https://www.linkedin.com/in/nick-coffyn/" title="LinkedIn"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                <a href="mailto:nickcoffyn@me.com" title="Email"><i class="fas fa-envelope"></i> Email</a>
+                <a href="tel:+32475941273" title="Phone"><i class="fas fa-phone"></i> +32 475 94 12 73</a>
+            </div>
+        </header>
+
+        <section class="section">
+            <h2 class="section-title">About Me</h2>
+            <p>Tech enthusiast by night, AI innovator by day — I'm a Senior CS Product Manager at Amazon who transforms traditional customer service into intelligent, AI-powered experiences. When I'm not orchestrating LLM implementations or crafting feedback-driven AI workflows, you'll find me elbow-deep in computer hardware — building custom rigs that don't just look good; they contribute to scientific research.</p>
+            
+            <p>Ranked #2 on Amazon's Folding@Home team, my custom-built machines form part of a global distributed computing network accelerating medical breakthroughs. This hardware obsession mirrors my professional approach: optimizing systems, eliminating inefficiencies, and pushing computational boundaries to solve real-world problems.</p>
+            
+            <p>My philosophy? Every process can be reimagined through the lens of AI and automation. Whether it's enhancing customer interactions with machine learning or streamlining operational workflows, I hunt inefficiencies with relentless curiosity. Currently expanding my toolkit by diving into Python and back-end development — because the architects of tomorrow's AI-powered systems need to understand what's under the hood.</p>
+            
+            <div class="skills">
+                <span class="skill-tag">AI/LLM Implementation</span>
+                <span class="skill-tag">Product Management</span>
+                <span class="skill-tag">Customer Service Transformation</span>
+                <span class="skill-tag">PC Building</span>
+                <span class="skill-tag">Machine Learning</span>
+                <span class="skill-tag">VoC & Feedback Systems</span>
+                <span class="skill-tag">Process Optimization</span>
+                <span class="skill-tag">Cross-functional Leadership</span>
+                <span class="skill-tag">Python (Learning)</span>
+                <span class="skill-tag">Distributed Computing</span>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Professional Experience</h2>
+            
+            <div class="experience-item">
+                <h3 class="experience-title">Senior CS Product Manager</h3>
+                <p class="experience-company" style="color: #FF9900;">Amazon</p>
+                <p class="experience-date">2025 - Present | Luxembourg, Luxembourg</p>
+                <ul>
+                    <li>Leading the development and optimization of customer service feedback mechanisms, linking them with AI-powered support options</li>
+                    <li>Collaborating with engineering and AI teams to refine machine learning models that enhance automated customer interactions</li>
+                    <li>Driving process improvements to ensure seamless integration of LLM-driven customer support solutions</li>
+                    <li>Partnering with stakeholders across customer service, product, and engineering to build scalable feedback-driven AI workflows</li>
+                </ul>
+            </div>
+            
+            <div class="experience-item">
+                <h3 class="experience-title">CS LLM Senior Program Manager</h3>
+                <p class="experience-company" style="color: #FF9900;">Amazon</p>
+                <p class="experience-date">May 2023 - 2025 | Luxembourg, Luxembourg</p>
+                <ul>
+                    <li>Led AI-powered customer service transformation, integrating LLM-driven solutions to enhance user experience</li>
+                    <li>Partnered with tech teams to optimize internal AI-enabled support platforms, improving response efficiency</li>
+                    <li>Managed cross-functional initiatives, scaling AI support systems to reduce manual workload and improve service delivery</li>
+                    <li>Developed customer feedback loops and VoC initiatives, streamlining AI model adjustments based on real-world user inputs</li>
+                    <li>Led a team experimenting with LLMs, driving quick learnings on how to enable and leverage LLMs for customer service improvements</li>
+                </ul>
+            </div>
+            
+            <div class="experience-item">
+                <h3 class="experience-title">Ops Intel Manager</h3>
+                <p class="experience-company" style="color: #FF9900;">Amazon</p>
+                <p class="experience-date">September 2021 - May 2023 | Luxembourg, Luxembourg</p>
+                <ul>
+                    <li>Established an Operational Intelligence framework, leveraging data insights to optimize service performance</li>
+                    <li>Drove customer experience enhancement programs, aligning user expectations with evolving AI service models</li>
+                    <li>Led data-driven service improvements, ensuring seamless integration of AI-based solutions across global support teams</li>
+                    <li>Managed a team of 20 Quality Analysts from various levels, optimizing global quality strategies for emerging products</li>
+                </ul>
+            </div>
+            
+            <div class="experience-item">
+                <h3 class="experience-title">Trainer & Quality Lead - Alphabet Nest (Google)</h3>
+                <p class="experience-company">Voxpro</p>
+                <p class="experience-date">August 2015 - December 2016 | Dublin, Ireland</p>
+                <ul>
+                    <li>Trained 8 classes of new CS agent to be the top performers within the contract</li>
+                    <li>Built several new SOP's that have been accepted throughout the company</li>
+                    <li>Created a process adherence and self guided training web app platform for agents (Call Flow)</li>
+                    <li>Working closely with all levels of the company, entry level to senior ops and daily meetings with our client (Nest)</li>
+                </ul>
+            </div>
+            
+            <div class="experience-item">
+                <h3 class="experience-title">Technical Support Agent - Alphabet Nest (Google)</h3>
+                <p class="experience-company">Voxpro</p>
+                <p class="experience-date">November 2014 - August 2015 | Dublin, Ireland</p>
+                <ul>
+                    <li>Highest consecutive scores in CSAT and NPS</li>
+                    <li>Aiding in several internal projects for Nest</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Featured Projects</h2>
+            
+            <div class="project-card">
+                <h3 class="project-title">Project Marvin / Call Flow</h3>
+                <p class="experience-date">August 2015 - December 2017 | Dublin</p>
+                <p>Spearheaded and created a Web App for customer service agents that assists in correct procedure adherence, increasing consistency across a team of 100 agents and boosting positive customer survey scores by 9.28%.</p>
+                <div class="project-tags">
+                    <span class="skill-tag">Web Development</span>
+                    <span class="skill-tag">Process Improvement</span>
+                    <span class="skill-tag">Customer Experience</span>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <h3 class="project-title">Project Trillian</h3>
+                <p class="experience-date">May 2016 - October 2017 | Dublin</p>
+                <p>Measurement of project Marvin / Call Flow, analyzing all available metrics over time to correlate increases or decreasing scores within the Call Center environment.</p>
+                <div class="project-tags">
+                    <span class="skill-tag">Data Analysis</span>
+                    <span class="skill-tag">Performance Metrics</span>
+                    <span class="skill-tag">Customer Satisfaction</span>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <h3 class="project-title">Innovation Leadership</h3>
+                <p class="experience-date">May 2017 - Present | Stuttgart</p>
+                <p>Leading a global innovation initiative, coordinating 28 global followers, achieving top management sponsorship, and increasing global collaboration.</p>
+                <div class="project-tags">
+                    <span class="skill-tag">Leadership</span>
+                    <span class="skill-tag">Global Coordination</span>
+                    <span class="skill-tag">Innovation</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3 class="project-title">Customer Centricity Program</h3>
+                <p class="experience-date">July 2017 - Present | Maastricht</p>
+                <p>Leading CSAT and NPS analysis initiatives, establishing analysis methodology for Mercedes Europe, and successfully deploying analysis frameworks across 15 countries.</p>
+                <div class="project-tags">
+                    <span class="skill-tag">Customer Experience</span>
+                    <span class="skill-tag">Data Analysis</span>
+                    <span class="skill-tag">Methodology Development</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Achievements</h2>
+            
+            <div class="achievement-card">
+                <h3 class="achievement-title">
+                    <i class="fas fa-gem"></i> Courage I Had
+                </h3>
+                <p>To start traveling the world, embracing new experiences and challenges across different countries and cultures.</p>
+            </div>
+            
+            <div class="achievement-card">
+                <h3 class="achievement-title">
+                    <i class="fas fa-bolt"></i> Proud Achievements
+                </h3>
+                <p>1. Won Amazon's prestigious Door Desk Award for exceptional contributions</p>
+                <p>2. Headhunted by Mercedes-Benz CAC and later by Amazon Customer Service, recognizing my expertise in quality management and process transformation</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Languages & Skills</h2>
+            
+            <div class="experience-item">
+                <h3 class="experience-title">Languages</h3>
+                
+                <p>Dutch</p>
+                <div class="progress-bar">
+                    <div class="progress native"></div>
+                </div>
+                
+                <p>English</p>
+                <div class="progress-bar">
+                    <div class="progress native"></div>
+                </div>
+                
+                <p>French</p>
+                <div class="progress-bar">
+                    <div class="progress intermediate"></div>
+                </div>
+            </div>
+            
+            <div class="experience-item">
+                <h3 class="experience-title">Professional Skills</h3>
+                
+                <p>SalesForce</p>
+                <div class="progress-bar">
+                    <div class="progress proficient"></div>
+                </div>
+                
+                <p>Training</p>
+                <div class="progress-bar">
+                    <div class="progress advanced"></div>
+                </div>
+                
+                <p>Python (Learning)</p>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 15%;"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">What I Do on the Side</h2>
+            
+            <div class="side-interests">
+                <div class="interest-card">
+                    <h3 class="interest-title">Volunteer Translator</h3>
+                    <p>Since June 2017, I've volunteered as a translator for European Digital Rights (EDRi), translating legal and informative documents related to European Digital Rights for consumers and businesses.</p>
+                </div>
+                
+                <div class="interest-card">
+                    <h3 class="interest-title">Learning Journey</h3>
+                    <p>Currently working through Boot.dev's Back-end Developer career path, methodically building my technical foundation in Python, Linux, Git, and beyond. This structured approach to learning complements my professional work with AI systems and allows me to better understand and influence the technical implementation of customer service solutions.</p>
+                </div>
+                
+                <div class="interest-card">
+                    <h3 class="interest-title">AI & Machine Learning</h3>
+                    <p>Exploring the frontiers of artificial intelligence and its applications in customer service. I experiment with LLMs and machine learning models to reimagine how humans and AI can collaborate to solve complex service challenges.</p>
+                </div>
+                
+                <div class="interest-card">
+                    <h3 class="interest-title">Hardware Enthusiast</h3>
+                    <p>Building high-performance computing rigs isn't just a hobby—it's an obsession. Ranked #2 on Amazon's Folding@Home team (donor ID: 366956), my custom-built machines contribute to a global distributed computing project that simulates protein folding to advance research on diseases like cancer and COVID-19.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Training & Education</h2>
+            
+            <div class="experience-item">
+                <h3 class="experience-title">Training & Courses</h3>
+                <ul>
+                    <li>Prince2 Project Management | Knowledge academy Ireland (Practitioner & Foundation)</li>
+                    <li>Six Sigma - White belt | IBM - South Africa</li>
+                    <li>Houston PMI | Daimler - Netherlands</li>
+                    <li>Adobe Illustrator | CVO, Ypres</li>
+                    <li>Web Development | Shawacademy, online</li>
+                </ul>
+            </div>
+            
+            <div class="experience-item">
+                <h3 class="experience-title">Interior Design</h3>
+                <p class="experience-company">KASK, Gent, Belgium</p>
+                <p class="experience-date">2011 - 2013</p>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2025 Nick Coffyn. All rights reserved.</p>
+            <p>This page was last updated on March 22, 2025</p>
+        </footer>
+    </div>
+
+    <!-- Font Awesome for icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+</body>
+</html>
