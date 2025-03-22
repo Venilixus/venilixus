@@ -1,4 +1,4 @@
-<section class="section">
+<section class="section" id="achievements">
             <h2 class="section-title"><i class="fas fa-trophy"></i> Achievements</h2>
             
             <div class="achievement-card">
@@ -24,7 +24,7 @@
             </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="skills">
             <h2 class="section-title"><i class="fas fa-language"></i> Languages & Skills</h2>
             
             <div class="experience-item">
@@ -61,7 +61,7 @@
             </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="interests">
             <h2 class="section-title"><i class="fas fa-laptop-code"></i> What I Do on the Side</h2>
             
             <div class="side-interests">
@@ -121,7 +121,7 @@
             </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="contact">
             <h2 class="section-title"><i class="fas fa-envelope"></i> Contact Me</h2>
             
             <div class="contact-form">
@@ -235,6 +235,73 @@
                 }
             });
             
+            // Sidebar navigation toggle
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebarNav = document.getElementById('sidebarNav');
+            
+            sidebarToggle.addEventListener('click', () => {
+                if (sidebarNav.style.display === 'block') {
+                    sidebarNav.style.display = 'none';
+                    sidebarToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                } else {
+                    sidebarNav.style.display = 'block';
+                    sidebarToggle.innerHTML = '<i class="fas fa-times"></i>';
+                }
+            });
+            
+            // Hide sidebar when clicking anywhere else
+            document.addEventListener('click', (event) => {
+                if (!sidebarNav.contains(event.target) && event.target !== sidebarToggle) {
+                    sidebarNav.style.display = 'none';
+                    sidebarToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('.main-nav a, .sidebar-nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close sidebar if open
+                    sidebarNav.style.display = 'none';
+                    sidebarToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+            
+            // Highlight active section in navigation
+            window.addEventListener('scroll', () => {
+                let current = '';
+                
+                document.querySelectorAll('section').forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                document.querySelectorAll('.main-nav a').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+                
+                document.querySelectorAll('.sidebar-nav a').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+            
             // Initialize particles.js
             particlesJS('particles-js', {
                 particles: {
@@ -295,6 +362,7 @@
             --mercedes-color: #00D2BE;
             --progress-bar-bg: #30363d;
             --progress-bar-fill: #FF9900;
+            --nav-bg: rgba(33, 38, 45, 0.8);
         }
 
         :root.light-theme {
@@ -307,6 +375,7 @@
             --card-border: #d0d7de;
             --progress-bar-bg: #d0d7de;
             --progress-bar-fill: #FF9900;
+            --nav-bg: rgba(234, 238, 242, 0.9);
         }
 
         * {
@@ -401,6 +470,119 @@
             color: var(--accent-color);
         }
 
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 10px;
+            margin: 20px 0;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-nav a {
+            padding: 10px 15px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s, transform 0.3s;
+            border-radius: 5px;
+        }
+
+        .main-nav a:hover {
+            color: var(--accent-color);
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .main-nav a i {
+            margin-right: 5px;
+        }
+
+        .sidebar-nav {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--nav-bg);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            display: none;
+        }
+
+        .sidebar-nav-toggle {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--accent-color);
+            color: #000;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 101;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .sidebar-nav li:last-child {
+            margin-bottom: 0;
+        }
+
+        .sidebar-nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: color 0.3s, background-color 0.3s;
+        }
+
+        .sidebar-nav a:hover {
+            color: var(--accent-color);
+            background-color: rgba(255, 153, 0, 0.1);
+        }
+
+        .main-nav a.active {
+            color: var(--accent-color);
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .sidebar-nav a.active {
+            color: var(--accent-color);
+            background-color: rgba(255, 153, 0, 0.1);
+            font-weight: bold;
+        }
+
+        .sidebar-nav a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
         .section {
             background-color: var(--secondary-color);
             border-radius: 10px;
@@ -410,6 +592,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transform: translateY(0);
             transition: transform 0.3s, box-shadow 0.3s;
+            scroll-margin-top: 100px;
         }
 
         .section:hover {
@@ -897,10 +1080,10 @@
     <div id="particles-js"></div>
     <div class="container">
         <header>
-            <button class="theme-toggle" id="themeToggle">
+            <div class="theme-toggle" id="themeToggle">
                 <i class="fas fa-moon" id="themeIcon"></i>
                 <span id="themeText">Dark Mode</span>
-            </button>
+            </div>
             <img src="/api/placeholder/150/150" alt="Nick Coffyn" class="profile-img">
             <h1>NICK COFFYN</h1>
             <p class="tagline">Senior CS Product Manager - Amazon</p>
@@ -913,7 +1096,34 @@
             </div>
         </header>
 
-        <section class="section">
+        <!-- Main Navigation -->
+        <nav class="main-nav">
+            <a href="#about"><i class="fas fa-user-circle"></i> About</a>
+            <a href="#experience"><i class="fas fa-briefcase"></i> Experience</a>
+            <a href="#projects"><i class="fas fa-rocket"></i> Projects</a>
+            <a href="#achievements"><i class="fas fa-trophy"></i> Achievements</a>
+            <a href="#skills"><i class="fas fa-language"></i> Skills</a>
+            <a href="#interests"><i class="fas fa-laptop-code"></i> Interests</a>
+            <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+        </nav>
+
+        <!-- Sidebar Navigation -->
+        <div class="sidebar-nav-toggle" id="sidebarToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <nav class="sidebar-nav" id="sidebarNav">
+            <ul>
+                <li><a href="#about"><i class="fas fa-user-circle"></i> About Me</a></li>
+                <li><a href="#experience"><i class="fas fa-briefcase"></i> Experience</a></li>
+                <li><a href="#projects"><i class="fas fa-rocket"></i> Projects</a></li>
+                <li><a href="#achievements"><i class="fas fa-trophy"></i> Achievements</a></li>
+                <li><a href="#skills"><i class="fas fa-language"></i> Skills</a></li>
+                <li><a href="#interests"><i class="fas fa-laptop-code"></i> Interests</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </nav>
+
+        <section class="section" id="about">
             <h2 class="section-title"><i class="fas fa-user-circle"></i> About Me</h2>
             <div class="animated-typing" id="typingEffect">
                 > const nickCoffyn = new AIEnthusiast();<br>
@@ -1013,6 +1223,338 @@
                 <span class="skill-tag">Cross-functional Leadership</span>
                 <span class="skill-tag">Python (Learning)</span>
                 <span class="skill-tag">Distributed Computing</span>
+            </div>
+        </section>
+
+        <section class="section" id="experience">
+            <h2 class="section-title"><i class="fas fa-briefcase"></i> Professional Experience</h2>
+            
+            <div class="tab-container">
+                <div class="tabs">
+                    <button class="tab active" data-tab="amazon">Amazon</button>
+                    <button class="tab" data-tab="mercedes">Mercedes</button>
+                    <button class="tab" data-tab="previous">Previous</button>
+                </div>
+                
+                <div class="tab-content active" id="amazon">
+                    <div class="experience-item">
+                        <h3 class="experience-title">Senior CS Product Manager</h3>
+                        <p class="experience-company" style="color: #FF9900;">Amazon</p>
+                        <p class="experience-date">2025 - Present | Luxembourg, Luxembourg</p>
+                        <ul>
+                            <li>Leading the development and optimization of customer service feedback mechanisms, linking them with AI-powered support options</li>
+                            <li>Collaborating with engineering and AI teams to refine machine learning models that enhance automated customer interactions</li>
+                            <li>Driving process improvements to ensure seamless integration of LLM-driven customer support solutions</li>
+                            <li>Partnering with stakeholders across customer service, product, and engineering to build scalable feedback-driven AI workflows</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="experience-item">
+                        <h3 class="experience-title">CS LLM Senior Program Manager</h3>
+                        <p class="experience-company" style="color: #FF9900;">Amazon</p>
+                        <p class="experience-date">May 2023 - 2025 | Luxembourg, Luxembourg</p>
+                        <ul>
+                            <li>Led AI-powered customer service transformation, integrating LLM-driven solutions to enhance user experience</li>
+                            <li>Partnered with tech teams to optimize internal AI-enabled support platforms, improving response efficiency</li>
+                            <li>Managed cross-functional initiatives, scaling AI support systems to reduce manual workload and improve service delivery</li>
+                            <li>Developed customer feedback loops and VoC initiatives, streamlining AI model adjustments based on real-world user inputs</li>
+                            <li>Led a team experimenting with LLMs, driving quick learnings on how to enable and leverage LLMs for customer service improvements</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="experience-item">
+                        <h3 class="experience-title">Ops Intel Manager</h3>
+                        <p class="experience-company" style="color: #FF9900;">Amazon</p>
+                        <p class="experience-date">September 2021 - May 2023 | Luxembourg, Luxembourg</p>
+                        <ul>
+                            <li>Established an Operational Intelligence framework, leveraging data insights to optimize service performance</li>
+                            <li>Drove customer experience enhancement programs, aligning user expectations with evolving AI service models</li>
+                            <li>Led data-driven service improvements, ensuring seamless integration of AI-based solutions across global support teams</li>
+                            <li>Managed a team of 20 Quality Analysts from various levels, optimizing global quality strategies for emerging products</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="mercedes">
+                    <div class="experience-item">
+                        <h3 class="experience-title">Global Quality Specialist & Project Manager</h3>
+                        <p class="experience-company mercedes-color">Daimler - Mercedes</p>
+                        <p class="experience-date">November 2018 - June 2019 | Maastricht, Netherlands</p>
+                        <ul>
+                            <li>Creation and deployment of Global Quality Framework</li>
+                            <li>Relationship builder with global vendors</li>
+                            <li>Deployment & roll out of Global LMS</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="experience-item">
+                        <h3 class="experience-title">Quality Specialist & Project Lead</h3>
+                        <p class="experience-company mercedes-color">Daimler - Mercedes</p>
+                        <p class="experience-date">January 2017 - November 2018 | Maastricht, Netherlands</p>
+                        <ul>
+                            <li>Increase of quality for Benelux, UK / Ireland</li>
+                            <li>Quality assessment of 200 agents</li>
+                            <li>Active representative and introduction of NPS</li>
+                            <li>Assisting in CSS Root Cause Analysis & closed feedback loop</li>
+                            <li>Project lead for Global Innovative Leadership</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="previous">
+                    <div class="experience-item">
+                        <h3 class="experience-title">Trainer & Quality Lead - Alphabet Nest (Google)</h3>
+                        <p class="experience-company">Voxpro</p>
+                        <p class="experience-date">August 2015 - December 2016 | Dublin, Ireland</p>
+                        <ul>
+                            <li>Built several new SOP's that have been accepted throughout the company</li>
+                            <li>Created a process adherence and self-guided training web app platform for agents (Call Flow)</li>
+                            <li>Having trained 8 classes of new CS agent to be the top performers within the contract</li>
+                            <li>Working closely with all levels of the company, entry level to senior ops and daily meetings with our client (Nest)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline">
+                <h3>Career Timeline</h3>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2025-Present</h3>
+                        <p>Senior CS Product Manager at Amazon</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2023-2025</h3>
+                        <p>CS LLM Senior Program Manager at Amazon</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2021-2023</h3>
+                        <p>Ops Intel Manager at Amazon</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2018-2019</h3>
+                        <p>Global Quality Specialist at Mercedes-Benz</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2017-2018</h3>
+                        <p>Quality Specialist at Mercedes-Benz</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>2015-2016</h3>
+                        <p>Trainer & Quality Lead at Voxpro (Google Nest)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="projects">
+            <h2 class="section-title"><i class="fas fa-rocket"></i> Featured Projects</h2>
+            
+            <div class="project-card">
+                <h3 class="project-title">LLM-Powered Customer Service Transformation</h3>
+                <p class="experience-date">2023 - Present | Amazon</p>
+                <p>Leading the integration of Large Language Models into Amazon's customer service ecosystem, resulting in more efficient issue resolution, reduced manual workload, and enhanced customer satisfaction. This initiative has revolutionized how customers interact with support systems.</p>
+                <div class="project-tags">
+                    <span class="skill-tag">AI Integration</span>
+                    <span class="skill-tag">LLMs</span>
+                    <span class="skill-tag">Customer Experience</span>
+                    <span class="skill-tag">Process Transformation</span>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <h3 class="project-title">Feedback-Driven AI Workflow System</h3>
+                <p class="experience-date">2024 - Present | Amazon</p>
+                <p>Developed an innovative system that captures customer feedback and automatically refines AI models, creating a continuous improvement loop. This strategic initiative has resulted in more accurate AI responses and significantly improved first-contact resolution rates.</p>
+                <div class="project-tags">
+                    <span class="skill-tag">AI Model Optimization</span>
+                    <span class="skill-tag">Feedback Systems</span>
+                    <span class="skill-tag">Machine Learning</span>
+                    <span class="skill-tag">VoC Integration</span>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <h3 class="project-title">Operational Intelligence Framework</h3>
+                <p class="experience-date">2021 - 2023 | Amazon</p>
+                <p>Established a data-driven operational intelligence framework that leverages advanced analytics to optimize service performance and enable predictive decision-making across global support teams.</p>
+                <div class="project-tags">
+                    <span class="skill-tag">Data Analysis</span>
+                    <span class="skill-tag">Predictive Analytics</span>
+                    <span class="skill-tag">Operational Excellence</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3 class="project-title">Project Marvin / Call Flow</h3>
+                <p class="experience-date">2015 - 2017 | Dublin</p>
+                <p>Spearheaded and created a Web App for customer service agents that assists in correct procedure adherence, increasing consistency across a team of 100 agents and boosting positive customer survey scores by 9.28%.</p>
+                <div class="project-tags">
+                    <span class="skill-tag">Web Development</span>
+                    <span class="skill-tag">Process Improvement</span>
+                    <span class="skill-tag">Training Tools</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-trophy"></i> Achievements</h2>
+            
+            <div class="achievement-card">
+                <h3 class="achievement-title">
+                    <i class="fas fa-gem"></i> Courage I Had
+                </h3>
+                <p>Moved to 5 different countries for new work challenges, embracing diverse cultures and professional environments to expand my horizons and skill set.</p>
+            </div>
+            
+            <div class="achievement-card">
+                <h3 class="achievement-title">
+                    <i class="fas fa-bolt"></i> Proud Achievements
+                </h3>
+                <p>1. Won Amazon's prestigious Door Desk Award for exceptional contributions</p>
+                <p>2. Headhunted by Mercedes-Benz CAC and later by Amazon Customer Service, recognizing my expertise in quality management and process transformation</p>
+            </div>
+
+            <div class="achievement-card">
+                <h3 class="achievement-title">
+                    <i class="fas fa-server"></i> Technical Achievement
+                </h3>
+                <p>Ranked #2 on Amazon's Folding@Home team, contributing significant computing power to scientific research through custom-built hardware setups.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-language"></i> Languages & Skills</h2>
+            
+            <div class="experience-item">
+                <h3 class="experience-title">Languages</h3>
+                
+                <p>Dutch</p>
+                <div class="progress-bar">
+                    <div class="progress native"></div>
+                </div>
+                
+                <p>English</p>
+                <div class="progress-bar">
+                    <div class="progress native"></div>
+                </div>
+                
+                <p>French</p>
+                <div class="progress-bar">
+                    <div class="progress intermediate"></div>
+                </div>
+            </div>
+            
+            <div class="experience-item">
+                <h3 class="experience-title">Professional Skills</h3>
+                
+                <p>Project Management</p>
+                <div class="progress-bar">
+                    <div class="progress proficient"></div>
+                </div>
+                
+                <p>Training</p>
+                <div class="progress-bar">
+                    <div class="progress advanced"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-laptop-code"></i> What I Do on the Side</h2>
+            
+            <div class="side-interests">
+                <div class="interest-card">
+                    <h3 class="interest-title"><i class="fas fa-server"></i> Hardware Enthusiast</h3>
+                    <p>Building high-performance computing rigs isn't just a hobby—it's an obsession. Ranked #2 on Amazon's Folding@Home team (donor ID: 366956), my custom-built machines contribute to a global distributed computing project that simulates protein folding to advance research on diseases like cancer and COVID-19.</p>
+                </div>
+                
+                <div class="interest-card">
+                    <h3 class="interest-title"><i class="fas fa-robot"></i> AI & Machine Learning</h3>
+                    <p>Exploring the frontiers of artificial intelligence and its applications in customer service. I experiment with LLMs and machine learning models to reimagine how humans and AI can collaborate to solve complex service challenges.</p>
+                </div>
+                
+                <div class="interest-card">
+                    <h3 class="interest-title"><i class="fas fa-code"></i> Learning Journey</h3>
+                    <p>Currently working through Boot.dev's Back-end Developer career path, methodically building my technical foundation in Python, Linux, Git, and beyond. This structured approach to learning complements my professional work with AI systems and allows me to better understand and influence the technical implementation of customer service solutions.</p>
+                </div>
+                
+                <div class="interest-card">
+                    <h3 class="interest-title"><i class="fas fa-universal-access"></i> Volunteer Translator</h3>
+                    <p>Since June 2017, I've volunteered as a translator for European Digital Rights (EDRi), translating legal and informative documents related to European Digital Rights for consumers and businesses.</p>
+                </div>
+            </div>
+
+            <div class="learning-progress">
+                <h3><i class="fas fa-graduation-cap"></i> Current Learning Progress</h3>
+                <div class="course-item">
+                    <h4>Learn to Code in Python</h4>
+                    <div class="course-progress">
+                        <span>29/161 exercises completed</span>
+                        <span>18%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 18%;"></div>
+                    </div>
+                </div>
+                <div class="course-item">
+                    <h4>Learn Linux</h4>
+                    <div class="course-progress">
+                        <span>Up next in Boot.dev curriculum</span>
+                        <span>0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 0%;"></div>
+                    </div>
+                </div>
+                <div class="course-item">
+                    <h4>Overall Backend Journey</h4>
+                    <div class="course-progress">
+                        <span>Just getting started!</span>
+                        <span>5%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 5%;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-envelope"></i> Contact Me</h2>
+            
+            <div class="contact-form">
+                <p>I'm always interested in discussing AI innovations, customer service transformation, or hardware projects. Feel free to reach out!</p>
+                
+                <form id="contactForm" action="javascript:void(0);" onsubmit="alert('This form would send an email to Nick. In a real implementation, it would be connected to a serverless function.')">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
             </div>
         </section>
 
