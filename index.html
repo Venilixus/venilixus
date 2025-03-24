@@ -1495,5 +1495,64 @@
             }
         });
     </script>
+    <script>
+  fetch('https://raw.githubusercontent.com/Venilixus/venilixus/main/progress.json')
+    .then(res => res.json())
+    .then(data => {
+      const langContainer = document.getElementById('language-section');
+      const courseContainer = document.getElementById('course-section');
+
+      // Languages
+      data.languages.forEach(lang => {
+        const label = document.createElement('p');
+        label.textContent = lang.name;
+
+        const bar = document.createElement('div');
+        bar.className = 'progress-bar';
+        if (lang.customHeight) bar.style.height = lang.customHeight;
+
+        const fill = document.createElement('div');
+        fill.className = 'progress';
+        fill.style.width = lang.percentage;
+        if (lang.color) fill.style.backgroundColor = lang.color;
+
+        bar.appendChild(fill);
+        langContainer.appendChild(label);
+        langContainer.appendChild(bar);
+      });
+
+      // Courses
+      data.courses.forEach(course => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'course-item';
+
+        const title = document.createElement('h4');
+        title.textContent = course.name;
+
+        const meta = document.createElement('div');
+        meta.className = 'course-meta';
+        meta.innerHTML = `<span>${course.status}</span><span>${course.percentage}</span>`;
+
+        const bar = document.createElement('div');
+        bar.className = 'progress-bar';
+
+        const fill = document.createElement('div');
+        fill.className = 'progress';
+        fill.style.width = course.percentage;
+        if (course.color) fill.style.backgroundColor = course.color;
+
+        bar.appendChild(fill);
+        wrapper.appendChild(title);
+        wrapper.appendChild(meta);
+        wrapper.appendChild(bar);
+        courseContainer.appendChild(wrapper);
+      });
+    })
+    .catch(err => {
+      document.getElementById('language-section').textContent = '⚠ Failed to load language data.';
+      document.getElementById('course-section').textContent = '⚠ Failed to load course data.';
+      console.error(err);
+    });
+</script>
 </body>
 </html>
