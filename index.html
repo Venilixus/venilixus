@@ -1,4 +1,130 @@
-<!DOCTYPE html>
+});
+    </script>
+    
+    <script>
+        // Script for loading progress data from JSON
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load progress data from the JSON file
+            fetch('https://raw.githubusercontent.com/Venilixus/venilixus/main/progress.json')
+                .then(res => res.json())
+                .then(data => {
+                    const langContainer = document.getElementById('language-section');
+                    const courseContainer = document.getElementById('course-section');
+
+                    if (!langContainer || !courseContainer) {
+                        console.error('Could not find language-section or course-section elements');
+                        return;
+                    }
+
+                    // Clear existing content
+                    langContainer.innerHTML = '';
+                    courseContainer.innerHTML = '<h3><i class="fas fa-book"></i> Learning Progress</h3>';
+
+                    // Languages
+                    data.languages.forEach(lang => {
+                        const label = document.createElement('p');
+                        label.textContent = lang.name;
+
+                        const bar = document.createElement('div');
+                        bar.className = 'progress-bar';
+                        if (lang.customHeight) bar.style.height = lang.customHeight;
+
+                        const fill = document.createElement('div');
+                        fill.className = 'progress';
+                        fill.style.width = lang.percentage;
+                        if (lang.color) fill.style.backgroundColor = lang.color;
+
+                        bar.appendChild(fill);
+                        langContainer.appendChild(label);
+                        langContainer.appendChild(bar);
+                    });
+
+                    // Courses
+                    data.courses.forEach(course => {
+                        const wrapper = document.createElement('div');
+                        wrapper.className = 'course-item';
+
+                        const title = document.createElement('h4');
+                        title.textContent = course.name;
+
+                        const progressInfo = document.createElement('div');
+                        progressInfo.className = 'course-progress';
+                        progressInfo.innerHTML = `
+                            <span>${course.status}</span>
+                            <span>${course.percentage}</span>
+                        `;
+
+                        const bar = document.createElement('div');
+                        bar.className = 'progress-bar';
+
+                        const fill = document.createElement('div');
+                        fill.className = 'progress';
+                        fill.style.width = course.percentage;
+                        if (course.color) fill.style.backgroundColor = course.color;
+
+                        bar.appendChild(fill);
+                        wrapper.appendChild(title);
+                        wrapper.appendChild(progressInfo);
+                        wrapper.appendChild(bar);
+                        courseContainer.appendChild(wrapper);
+                    });
+                    
+                    // Load the learning roadmap data if it exists
+                    if (data.learning_roadmap) {
+                        const roadmapContainer = document.getElementById('roadmap-items');
+                        if (!roadmapContainer) return;
+                        
+                        // Clear container
+                        roadmapContainer.innerHTML = '';
+                        roadmapContainer.className = 'roadmap-items';
+                        
+                        // Create roadmap items
+                        data.learning_roadmap.forEach(item => {
+                            const itemElement = document.createElement('div');
+                            itemElement.className = 'roadmap-item';
+                            
+                            const dot = document.createElement('div');
+                            dot.className = `roadmap-dot ${item.status}`;
+                            
+                            const timeline = document.createElement('div');
+                            timeline.className = 'roadmap-timeline-text';
+                            timeline.textContent = item.timeline;
+                            
+                            const skill = document.createElement('div');
+                            skill.className = 'roadmap-skill';
+                            skill.textContent = item.skill;
+                            
+                            const description = document.createElement('div');
+                            description.className = 'roadmap-description';
+                            description.textContent = item.description;
+                            
+                            const resources = document.createElement('div');
+                            resources.className = 'roadmap-resources';
+                            resources.textContent = item.resources;
+                            
+                            itemElement.appendChild(dot);
+                            itemElement.appendChild(timeline);
+                            itemElement.appendChild(skill);
+                            itemElement.appendChild(description);
+                            itemElement.appendChild(resources);
+                            
+                            roadmapContainer.appendChild(itemElement);
+                        });
+                    }
+                })
+                .catch(err => {
+                    console.error('Error loading progress data:', err);
+                    const langContainer = document.getElementById('language-section');
+                    const courseContainer = document.getElementById('course-section');
+                    
+                    if (langContainer) langContainer.textContent = '⚠ Failed to load language data.';
+                    if (courseContainer) courseContainer.textContent = '⚠ Failed to load course data.';
+                });
+        });
+    </script>
+</body>
+</html>
+                <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -779,6 +905,103 @@
             background-color: #e08600;
         }
 
+        /* New styles for the learning roadmap */
+        .learning-roadmap {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 20px 0;
+            border: 1px solid var(--card-border);
+        }
+
+        .roadmap-timeline {
+            position: relative;
+            margin: 40px auto;
+            max-width: 1000px;
+        }
+
+        .roadmap-line {
+            position: absolute;
+            top: 25px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--mercedes-color));
+            z-index: 1;
+        }
+
+        .roadmap-items {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+            flex-wrap: wrap;
+        }
+
+        .roadmap-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 220px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .roadmap-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .roadmap-dot.planned {
+            background-color: #8B949E;
+        }
+
+        .roadmap-dot.in-progress {
+            background-color: var(--accent-color);
+        }
+
+        .roadmap-dot.completed {
+            background-color: var(--mercedes-color);
+        }
+
+        .roadmap-dot::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .roadmap-timeline-text {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--highlight-color);
+        }
+
+        .roadmap-skill {
+            font-size: 1.1rem;
+            color: var(--highlight-color);
+            margin-bottom: 5px;
+        }
+
+        .roadmap-description {
+            font-size: 0.85rem;
+            line-height: 1.3;
+            margin-bottom: 5px;
+        }
+
+        .roadmap-resources {
+            font-size: 0.8rem;
+            color: var(--accent-color);
+        }
+
         @media (max-width: 768px) {
             .side-interests {
                 grid-template-columns: 1fr;
@@ -892,6 +1115,34 @@
                 display: block;
                 margin-left: 0;
                 margin-top: 2px;
+            }
+            
+            /* Mobile styles for roadmap */
+            .roadmap-items {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .roadmap-item {
+                max-width: 100%;
+                flex-direction: row;
+                text-align: left;
+                padding-left: 30px;
+                margin-bottom: 20px;
+            }
+            
+            .roadmap-dot {
+                position: absolute;
+                left: 0;
+            }
+            
+            .roadmap-line {
+                height: 100%;
+                width: 4px;
+                left: 10px;
+                top: 0;
+                bottom: 0;
+                right: auto;
             }
         }
     </style>
@@ -1007,8 +1258,6 @@
                     </div>
                 </div>
             </div>
-        </section>
-
         <!-- 2. PROFESSIONAL EXPERIENCE SECTION -->
         <section class="section" id="experience">
             <h2 class="section-title"><i class="fas fa-briefcase"></i> Professional Experience</h2>
@@ -1145,8 +1394,6 @@
                     </div>
                 </div>
             </div>
-        </section>
-
         <!-- 3. WHAT I DO ON THE SIDE SECTION -->
         <section class="section" id="interests">
             <h2 class="section-title"><i class="fas fa-laptop-code"></i> What I Do on the Side</h2>
@@ -1179,58 +1426,36 @@
                 <div id="course-section"></div>
             </div>
             
+            <!-- NEW SECTION: Learning Roadmap -->
+            <div class="learning-roadmap">
+                <h3><i class="fas fa-road"></i> My Learning Roadmap</h3>
+                <div class="roadmap-timeline">
+                    <div class="roadmap-line"></div>
+                    <div id="roadmap-items">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+            
             <div class="folding-stats">
-    <h3><i class="fas fa-server"></i> Folding@Home Live Stats - Donor ID: 366956</h3>
-    <div id="folding-loader" class="text-center">
-        <p><i class="fas fa-spinner fa-spin"></i> Loading live stats...</p>
-    </div>
-    <div id="folding-data" style="display: none;">
-        <div class="stat-row">
-            <span class="stat-label">Team Rank</span>
-            <span class="stat-value" id="team-rank">#2 on Amazon's Team</span>
-        </div>
-        <div class="stat-row">
-            <span class="stat-label">Work Units Completed</span>
-            <span class="stat-value" id="work-units">Loading...</span>
-        </div>
-        <div class="stat-row">
-            <span class="stat-label">Total Points</span>
-            <span class="stat-value" id="total-points">Loading...</span>
-        </div>
-        <div class="stat-row">
-            <span class="stat-label">Last Updated</span>
-            <span class="stat-value" id="last-updated">Loading...</span>
-        </div>
-        <div class="stat-row">
-            <span class="stat-label">Recent Activity</span>
-            <span class="stat-value" id="recent-activity">Loading...</span>
-        </div>
-    </div>
-    <div id="folding-error" style="display: none;">
-        <p class="text-danger">Unable to load live stats. Showing cached data.</p>
-        <div class="stat-row">
-            <span class="stat-label">Team Rank</span>
-            <span class="stat-value">#2 on Amazon's Team</span>
-        </div>
-        <div class="stat-row">
-            <span class="stat-label">Work Units Completed</span>
-            <span class="stat-value">5,000+</span>
-        </div>
-        <div class="stat-row">
-            <span class="stat-label">Active Hardware</span>
-            <span class="stat-value">3 Custom-Built Rigs</span>
-        </div>
-        <div class="stat-row">
-            <span class="stat-label">Contribution Focus</span>
-            <span class="stat-value">Cancer Research, COVID-19</span>
-        </div>
-    </div>
-    <button id="refresh-folding" class="btn btn-sm" style="margin-top: 15px;">
-        <i class="fas fa-sync-alt"></i> Refresh Stats
-    </button>
-</div>
-        </section>
-
+                <h3><i class="fas fa-server"></i> Folding@Home Stats - Donor ID: 366956</h3>
+                <div class="stat-row">
+                    <span class="stat-label">Team Rank</span>
+                    <span class="stat-value">#2 on Amazon's Team</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Work Units Completed</span>
+                    <span class="stat-value">5,000+</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Active Hardware</span>
+                    <span class="stat-value">3 Custom-Built Rigs</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Contribution Focus</span>
+                    <span class="stat-value">Cancer Research, COVID-19</span>
+                </div>
+            </div>
         <!-- 4. ACHIEVEMENTS SECTION -->
         <section class="section" id="achievements">
             <h2 class="section-title"><i class="fas fa-trophy"></i> Achievements</h2>
@@ -1256,8 +1481,6 @@
                 </h3>
                 <p>Ranked #2 on Amazon's Folding@Home team, contributing significant computing power to scientific research through custom-built hardware setups.</p>
             </div>
-        </section>
-
         <!-- 6. LANGUAGES & SKILLS SECTION -->
         <section class="section" id="skills">
             <h2 class="section-title"><i class="fas fa-language"></i> Languages & Skills</h2>
@@ -1471,140 +1694,54 @@
                 });
             }
         });
-    </script>
-    
-    <!-- Script for loading progress data from JSON -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load progress data from the JSON file
-            fetch('https://raw.githubusercontent.com/Venilixus/venilixus/main/progress.json')
-                .then(res => res.json())
-                .then(data => {
-                    const langContainer = document.getElementById('language-section');
-                    const courseContainer = document.getElementById('course-section');
 
-                    if (!langContainer || !courseContainer) {
-                        console.error('Could not find language-section or course-section elements');
-                        return;
-                    }
-
-                    // Clear existing content
-                    langContainer.innerHTML = '';
-                    courseContainer.innerHTML = '<h3><i class="fas fa-book"></i> Learning Progress</h3>';
-
-                    // Languages
-                    data.languages.forEach(lang => {
-                        const label = document.createElement('p');
-                        label.textContent = lang.name;
-
-                        const bar = document.createElement('div');
-                        bar.className = 'progress-bar';
-                        if (lang.customHeight) bar.style.height = lang.customHeight;
-
-                        const fill = document.createElement('div');
-                        fill.className = 'progress';
-                        fill.style.width = lang.percentage;
-                        if (lang.color) fill.style.backgroundColor = lang.color;
-
-                        bar.appendChild(fill);
-                        langContainer.appendChild(label);
-                        langContainer.appendChild(bar);
-                    });
-
-                    // Courses
-                    data.courses.forEach(course => {
-                        const wrapper = document.createElement('div');
-                        wrapper.className = 'course-item';
-
-                        const title = document.createElement('h4');
-                        title.textContent = course.name;
-
-                        const progressInfo = document.createElement('div');
-                        progressInfo.className = 'course-progress';
-                        progressInfo.innerHTML = `
-                            <span>${course.status}</span>
-                            <span>${course.percentage}</span>
-                        `;
-
-                        const bar = document.createElement('div');
-                        bar.className = 'progress-bar';
-
-                        const fill = document.createElement('div');
-                        fill.className = 'progress';
-                        fill.style.width = course.percentage;
-                        if (course.color) fill.style.backgroundColor = course.color;
-
-                        bar.appendChild(fill);
-                        wrapper.appendChild(title);
-                        wrapper.appendChild(progressInfo);
-                        wrapper.appendChild(bar);
-                        courseContainer.appendChild(wrapper);
-                    });
-                })
-                .catch(err => {
-                    console.error('Error loading progress data:', err);
-                    const langContainer = document.getElementById('language-section');
-                    const courseContainer = document.getElementById('course-section');
-                    
-                    if (langContainer) langContainer.textContent = '⚠ Failed to load language data.';
-                    if (courseContainer) courseContainer.textContent = '⚠ Failed to load course data.';
-                });
-        });
-        function loadFoldingStats() {
-    const donorId = "366956";
-    const foldingLoader = document.getElementById('folding-loader');
-    const foldingData = document.getElementById('folding-data');
-    const foldingError = document.getElementById('folding-error');
-    
-    foldingLoader.style.display = 'block';
-    foldingData.style.display = 'none';
-    foldingError.style.display = 'none';
-    
-    // Use a CORS proxy if needed, or set up your own
-    // For production, you should set up your own proxy or use a backend service
-    fetch(`https://cors-anywhere.herokuapp.com/https://stats.foldingathome.org/api/donor/${donorId}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            document.getElementById('work-units').textContent = data.wus.toLocaleString();
-            document.getElementById('total-points').textContent = data.credit.toLocaleString();
+        <!-- 5. PROJECTS SECTION -->
+        <section class="section" id="projects">
+            <h2 class="section-title"><i class="fas fa-rocket"></i> Featured Projects</h2>
             
-            // Format date
-            const lastUpdated = new Date();
-            document.getElementById('last-updated').textContent = lastUpdated.toLocaleDateString() + ' ' + 
-                                                              lastUpdated.toLocaleTimeString();
+            <div class="project-card">
+                <h3 class="project-title">LLM-Powered Customer Service Transformation</h3>
+                <p class="experience-date">2023 - Present | Amazon</p>
+                <p>Leading the integration of Large Language Models into Amazon's customer service ecosystem, resulting in more efficient issue resolution, reduced manual workload, and enhanced customer satisfaction. This initiative has revolutionized how customers interact with support systems.</p>
+                <div class="project-tags">
+                    <span class="skill-tag">AI Integration</span>
+                    <span class="skill-tag">LLMs</span>
+                    <span class="skill-tag">Customer Experience</span>
+                    <span class="skill-tag">Process Transformation</span>
+                </div>
+            </div>
             
-            // Determine recent activity status
-            const lastWeekWus = data.wus_last_week || 0;
-            if (lastWeekWus > 0) {
-                document.getElementById('recent-activity').textContent = `Active (${lastWeekWus} WUs last week)`;
-                document.getElementById('recent-activity').style.color = '#4CAF50';
-            } else {
-                document.getElementById('recent-activity').textContent = 'Inactive (0 WUs last week)';
-                document.getElementById('recent-activity').style.color = '#FFC107';
-            }
+            <div class="project-card">
+                <h3 class="project-title">Feedback-Driven AI Workflow System</h3>
+                <p class="experience-date">2024 - Present | Amazon</p>
+                <p>Developed an innovative system that captures customer feedback and automatically refines AI models, creating a continuous improvement loop. This strategic initiative has resulted in more accurate AI responses and significantly improved first-contact resolution rates.</p>
+                <div class="project-tags">
+                    <span class="skill-tag">AI Model Optimization</span>
+                    <span class="skill-tag">Feedback Systems</span>
+                    <span class="skill-tag">Machine Learning</span>
+                    <span class="skill-tag">VoC Integration</span>
+                </div>
+            </div>
             
-            foldingLoader.style.display = 'none';
-            foldingData.style.display = 'block';
-        })
-        .catch(error => {
-            console.error('Error fetching Folding@Home stats:', error);
-            foldingLoader.style.display = 'none';
-            foldingError.style.display = 'block';
-        });
-}
+            <div class="project-card">
+                <h3 class="project-title">Operational Intelligence Framework</h3>
+                <p class="experience-date">2021 - 2023 | Amazon</p>
+                <p>Established a data-driven operational intelligence framework that leverages advanced analytics to optimize service performance and enable predictive decision-making across global support teams.</p>
+                <div class="project-tags">
+                    <span class="skill-tag">Data Analysis</span>
+                    <span class="skill-tag">Predictive Analytics</span>
+                    <span class="skill-tag">Operational Excellence</span>
+                </div>
+            </div>
 
-// Add event listener for refresh button
-document.getElementById('refresh-folding').addEventListener('click', loadFoldingStats);
-
-// Load stats on page load
-document.addEventListener('DOMContentLoaded', function() {
-    loadFoldingStats();
-});
-    </script>
-</body>
-</html>
+            <div class="project-card">
+                <h3 class="project-title">Project Marvin / Call Flow</h3>
+                <p class="experience-date">2015 - 2017 | Dublin</p>
+                <p>Spearheaded and created a Web App for customer service agents that assists in correct procedure adherence, increasing consistency across a team of 100 agents and boosting positive customer survey scores by 9.28%.</p>
+                <div class="project-tags">
+                    <span class="skill-tag">Web Development</span>
+                    <span class="skill-tag">Process Improvement</span>
+                    <span class="skill-tag">Training Tools</span>
+                </div>
+            </div>
+        </section>
