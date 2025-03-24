@@ -11,6 +11,7 @@
     {
       "name": "French",
       "percentage": "35%",
+      "customHeight": "6px"
     }
   ],
   "courses": [
@@ -29,39 +30,49 @@
       "status": "Just getting started!",
       "percentage": "5%"
     }
-  ]
-}
-{
-  "languages": [...your existing languages...],
-  "courses": [...your existing courses...],
+  ],
   "learning_roadmap": [
     {
-      "skill": "Python Advanced",
-      "timeline": "April 2025",
-      "status": "planned", 
-      "description": "Master advanced Python concepts including decorators, generators, and metaprogramming",
-      "resources": "Boot.dev Python track, Real Python tutorials"
+      "skill": "Python Fundamentals",
+      "timeline": "In Progress",
+      "status": "in-progress",
+      "description": "Core Python concepts including data structures, functions, and object-oriented programming",
+      "resources": "Boot.dev Python track"
     },
     {
-      "skill": "Database Design",
+      "skill": "Linux & Bash",
+      "timeline": "In Progress",
+      "status": "in-progress",
+      "description": "Command line basics, file system navigation, and bash scripting",
+      "resources": "Boot.dev Linux course"
+    },
+    {
+      "skill": "Computer Networking",
+      "timeline": "April 2025",
+      "status": "planned",
+      "description": "HTTP, APIs, and the fundamentals of network communication",
+      "resources": "Boot.dev Networking course"
+    },
+    {
+      "skill": "Algorithms & Data Structures",
       "timeline": "May 2025",
       "status": "planned",
-      "description": "Learn SQL optimization, indexes, and advanced database architecture",
-      "resources": "Boot.dev SQL track, PostgreSQL documentation"
+      "description": "Optimizing code, understanding time & space complexity",
+      "resources": "Boot.dev Algorithms course"
     },
     {
-      "skill": "AWS Cloud Services",
-      "timeline": "June-July 2025",
+      "skill": "Databases & SQL",
+      "timeline": "June 2025",
       "status": "planned",
-      "description": "Become proficient with key AWS services for backend development",
-      "resources": "AWS training, hands-on labs"
+      "description": "Database design, SQL queries, and data modeling",
+      "resources": "Boot.dev SQL course"
     },
     {
-      "skill": "Docker & Kubernetes",
-      "timeline": "August-September 2025",
+      "skill": "Backend Web Development",
+      "timeline": "July-August 2025",
       "status": "planned",
-      "description": "Container orchestration and deployment strategies",
-      "resources": "Docker docs, K8s tutorials"
+      "description": "Building web servers, RESTful APIs, and authentication",
+      "resources": "Boot.dev Backend course"
     }
   ]
 }
