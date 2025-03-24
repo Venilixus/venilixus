@@ -11,7 +11,7 @@
     {
       "name": "French",
       "percentage": "35%",
-      "customHeight": "6px"  // Optional: lowers the bar height if needed
+      "customHeight": "6px"
     }
   ],
   "courses": [
