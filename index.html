@@ -1550,6 +1550,61 @@
                     if (courseContainer) courseContainer.textContent = '⚠ Failed to load course data.';
                 });
         });
+        function loadFoldingStats() {
+    const donorId = "366956";
+    const foldingLoader = document.getElementById('folding-loader');
+    const foldingData = document.getElementById('folding-data');
+    const foldingError = document.getElementById('folding-error');
+    
+    foldingLoader.style.display = 'block';
+    foldingData.style.display = 'none';
+    foldingError.style.display = 'none';
+    
+    // Use a CORS proxy if needed, or set up your own
+    // For production, you should set up your own proxy or use a backend service
+    fetch(`https://cors-anywhere.herokuapp.com/https://stats.foldingathome.org/api/donor/${donorId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            document.getElementById('work-units').textContent = data.wus.toLocaleString();
+            document.getElementById('total-points').textContent = data.credit.toLocaleString();
+            
+            // Format date
+            const lastUpdated = new Date();
+            document.getElementById('last-updated').textContent = lastUpdated.toLocaleDateString() + ' ' + 
+                                                              lastUpdated.toLocaleTimeString();
+            
+            // Determine recent activity status
+            const lastWeekWus = data.wus_last_week || 0;
+            if (lastWeekWus > 0) {
+                document.getElementById('recent-activity').textContent = `Active (${lastWeekWus} WUs last week)`;
+                document.getElementById('recent-activity').style.color = '#4CAF50';
+            } else {
+                document.getElementById('recent-activity').textContent = 'Inactive (0 WUs last week)';
+                document.getElementById('recent-activity').style.color = '#FFC107';
+            }
+            
+            foldingLoader.style.display = 'none';
+            foldingData.style.display = 'block';
+        })
+        .catch(error => {
+            console.error('Error fetching Folding@Home stats:', error);
+            foldingLoader.style.display = 'none';
+            foldingError.style.display = 'block';
+        });
+}
+
+// Add event listener for refresh button
+document.getElementById('refresh-folding').addEventListener('click', loadFoldingStats);
+
+// Load stats on page load
+document.addEventListener('DOMContentLoaded', function() {
+    loadFoldingStats();
+});
     </script>
 </body>
 </html>
