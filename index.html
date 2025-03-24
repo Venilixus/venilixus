@@ -1180,24 +1180,55 @@
             </div>
             
             <div class="folding-stats">
-                <h3><i class="fas fa-server"></i> Folding@Home Stats - Donor ID: 366956</h3>
-                <div class="stat-row">
-                    <span class="stat-label">Team Rank</span>
-                    <span class="stat-value">#2 on Amazon's Team</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">Work Units Completed</span>
-                    <span class="stat-value">5,000+</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">Active Hardware</span>
-                    <span class="stat-value">3 Custom-Built Rigs</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">Contribution Focus</span>
-                    <span class="stat-value">Cancer Research, COVID-19</span>
-                </div>
-            </div>
+    <h3><i class="fas fa-server"></i> Folding@Home Live Stats - Donor ID: 366956</h3>
+    <div id="folding-loader" class="text-center">
+        <p><i class="fas fa-spinner fa-spin"></i> Loading live stats...</p>
+    </div>
+    <div id="folding-data" style="display: none;">
+        <div class="stat-row">
+            <span class="stat-label">Team Rank</span>
+            <span class="stat-value" id="team-rank">#2 on Amazon's Team</span>
+        </div>
+        <div class="stat-row">
+            <span class="stat-label">Work Units Completed</span>
+            <span class="stat-value" id="work-units">Loading...</span>
+        </div>
+        <div class="stat-row">
+            <span class="stat-label">Total Points</span>
+            <span class="stat-value" id="total-points">Loading...</span>
+        </div>
+        <div class="stat-row">
+            <span class="stat-label">Last Updated</span>
+            <span class="stat-value" id="last-updated">Loading...</span>
+        </div>
+        <div class="stat-row">
+            <span class="stat-label">Recent Activity</span>
+            <span class="stat-value" id="recent-activity">Loading...</span>
+        </div>
+    </div>
+    <div id="folding-error" style="display: none;">
+        <p class="text-danger">Unable to load live stats. Showing cached data.</p>
+        <div class="stat-row">
+            <span class="stat-label">Team Rank</span>
+            <span class="stat-value">#2 on Amazon's Team</span>
+        </div>
+        <div class="stat-row">
+            <span class="stat-label">Work Units Completed</span>
+            <span class="stat-value">5,000+</span>
+        </div>
+        <div class="stat-row">
+            <span class="stat-label">Active Hardware</span>
+            <span class="stat-value">3 Custom-Built Rigs</span>
+        </div>
+        <div class="stat-row">
+            <span class="stat-label">Contribution Focus</span>
+            <span class="stat-value">Cancer Research, COVID-19</span>
+        </div>
+    </div>
+    <button id="refresh-folding" class="btn btn-sm" style="margin-top: 15px;">
+        <i class="fas fa-sync-alt"></i> Refresh Stats
+    </button>
+</div>
         </section>
 
         <!-- 4. ACHIEVEMENTS SECTION -->
