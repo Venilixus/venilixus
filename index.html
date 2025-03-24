@@ -936,8 +936,7 @@
         <section class="section" id="about">
             <h2 class="section-title"><i class="fas fa-user-circle"></i> About Me</h2>
             <div class="animated-typing" id="typingText">
-                > const nickCoffyn = new AIEnthusiast();<br>
-                > nickCoffyn.init();
+                <!-- The typing animation will fill this dynamically via JavaScript -->
             </div>
             <p>With over 10 years of experience in transforming customer service operations, I currently lead AI-driven initiatives at Amazon as a Senior Product Manager. My expertise lies in implementing Large Language Models (LLMs) to enhance customer interactions, streamline support processes, and build scalable feedback systems that continuously improve AI performance.</p>
             
@@ -1228,57 +1227,6 @@
             </div>
         </section>
 
-        <!-- 5. PROJECTS SECTION -->
-        <section class="section" id="projects">
-            <h2 class="section-title"><i class="fas fa-rocket"></i> Featured Projects</h2>
-            
-            <div class="project-card">
-                <h3 class="project-title">LLM-Powered Customer Service Transformation</h3>
-                <p class="experience-date">2023 - Present | Amazon</p>
-                <p>Leading the integration of Large Language Models into Amazon's customer service ecosystem, resulting in more efficient issue resolution, reduced manual workload, and enhanced customer satisfaction. This initiative has revolutionized how customers interact with support systems.</p>
-                <div class="project-tags">
-                    <span class="skill-tag">AI Integration</span>
-                    <span class="skill-tag">LLMs</span>
-                    <span class="skill-tag">Customer Experience</span>
-                    <span class="skill-tag">Process Transformation</span>
-                </div>
-            </div>
-            
-            <div class="project-card">
-                <h3 class="project-title">Feedback-Driven AI Workflow System</h3>
-                <p class="experience-date">2024 - Present | Amazon</p>
-                <p>Developed an innovative system that captures customer feedback and automatically refines AI models, creating a continuous improvement loop. This strategic initiative has resulted in more accurate AI responses and significantly improved first-contact resolution rates.</p>
-                <div class="project-tags">
-                    <span class="skill-tag">AI Model Optimization</span>
-                    <span class="skill-tag">Feedback Systems</span>
-                    <span class="skill-tag">Machine Learning</span>
-                    <span class="skill-tag">VoC Integration</span>
-                </div>
-            </div>
-            
-            <div class="project-card">
-                <h3 class="project-title">Operational Intelligence Framework</h3>
-                <p class="experience-date">2021 - 2023 | Amazon</p>
-                <p>Established a data-driven operational intelligence framework that leverages advanced analytics to optimize service performance and enable predictive decision-making across global support teams.</p>
-                <div class="project-tags">
-                    <span class="skill-tag">Data Analysis</span>
-                    <span class="skill-tag">Predictive Analytics</span>
-                    <span class="skill-tag">Operational Excellence</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <h3 class="project-title">Project Marvin / Call Flow</h3>
-                <p class="experience-date">2015 - 2017 | Dublin</p>
-                <p>Spearheaded and created a Web App for customer service agents that assists in correct procedure adherence, increasing consistency across a team of 100 agents and boosting positive customer survey scores by 9.28%.</p>
-                <div class="project-tags">
-                    <span class="skill-tag">Web Development</span>
-                    <span class="skill-tag">Process Improvement</span>
-                    <span class="skill-tag">Training Tools</span>
-                </div>
-            </div>
-        </section>
-
         <!-- 6. LANGUAGES & SKILLS SECTION -->
         <section class="section" id="skills">
             <h2 class="section-title"><i class="fas fa-language"></i> Languages & Skills</h2>
@@ -1296,10 +1244,281 @@
                     <div class="progress native"></div>
                 </div>
                 
-               <div id="language-section"></div>
+                <div id="language-section"></div>
             </div>
             
             <div class="experience-item">
                 <h3 class="experience-title">Professional Skills</h3>
                 
-                <p>
+                <p>Project Management</p>
+                <div class="progress-bar">
+                    <div class="progress proficient"></div>
+                </div>
+                
+                <p>Training</p>
+                <div class="progress-bar">
+                    <div class="progress advanced"></div>
+                </div>
+            </div>
+            
+            <div class="skills">
+                <span class="skill-tag">AI/LLM Implementation</span>
+                <span class="skill-tag">Product Management</span>
+                <span class="skill-tag">Customer Service Transformation</span>
+                <span class="skill-tag">PC Building</span>
+                <span class="skill-tag">Machine Learning</span>
+                <span class="skill-tag">VoC & Feedback Systems</span>
+                <span class="skill-tag">Process Optimization</span>
+                <span class="skill-tag">Cross-functional Leadership</span>
+                <span class="skill-tag">Python (Learning)</span>
+                <span class="skill-tag">Distributed Computing</span>
+            </div>
+        </section>
+
+        <!-- Back to top button -->
+        <a href="#" class="back-to-top" id="backToTop">
+            <i class="fas fa-arrow-up"></i>
+        </a>
+
+        <footer>
+            <p>© 2025 Nick Coffyn. All rights reserved.</p>
+            <p>This page was last updated on March 24, 2025</p>
+            <p><a href="https://stats.foldingathome.org/donor/id/366956" target="_blank">Visit my Folding@Home stats</a></p>
+        </footer>
+    </div>
+
+    <!-- Font Awesome for icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <!-- Particles.js for background effect -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    
+    <script>
+        // Simplified typing effect
+        document.addEventListener('DOMContentLoaded', function() {
+            const typingText = document.getElementById('typingText');
+            if (typingText) {
+                const text = [
+                    "> const nickCoffyn = new AIEnthusiast();",
+                    "> nickCoffyn.init();",
+                    "> nickCoffyn.setSkills(['AI', 'LLM', 'CustomerService', 'Hardware']);",
+                    "> nickCoffyn.optimize(processes);",
+                    "> console.log('Ready to transform customer experiences with AI!')"
+                ];
+                
+                let fullText = '';
+                let currentLine = 0;
+                
+                const typeNextLine = () => {
+                    if (currentLine < text.length) {
+                        fullText += text[currentLine] + '<br>';
+                        typingText.innerHTML = fullText;
+                        currentLine++;
+                        setTimeout(typeNextLine, 1000);
+                    }
+                };
+                
+                typeNextLine();
+            }
+            
+            // Simple tab functionality
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+                    
+                    // Show the corresponding content
+                    const tabId = tab.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Theme toggle
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            
+            themeToggle.addEventListener('click', () => {
+                const html = document.documentElement;
+                
+                if (html.classList.contains('light-theme')) {
+                    html.classList.remove('light-theme');
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                    themeText.textContent = 'Dark Mode';
+                } else {
+                    html.classList.add('light-theme');
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                    themeText.textContent = 'Light Mode';
+                }
+            });
+            
+            // Show/hide back to top button
+            const backToTop = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+            
+            // Make tabs scrollable on mobile
+            const tabsContainer = document.querySelector('.tabs');
+            if (tabsContainer) {
+                const activeTab = tabsContainer.querySelector('.tab.active');
+                if (activeTab && window.innerWidth < 768) {
+                    setTimeout(() => {
+                        activeTab.scrollIntoView({
+                            behavior: 'smooth',
+                            inline: 'center',
+                            block: 'nearest'
+                        });
+                    }, 500);
+                }
+            }
+            
+            // Adjust heights for mobile
+            if (window.innerWidth < 768) {
+                const achievementsTimeline = document.querySelector('.achievements-timeline');
+                if (achievementsTimeline) {
+                    const timelineHeight = achievementsTimeline.scrollHeight;
+                    const timelineLine = achievementsTimeline.querySelector('.timeline-line');
+                    if (timelineLine) {
+                        timelineLine.style.height = `${timelineHeight}px`;
+                    }
+                }
+            }
+            
+            // Initialize particles.js if available
+            if (typeof particlesJS !== 'undefined') {
+                particlesJS('particles-js', {
+                    particles: {
+                        number: { value: 80, density: { enable: true, value_area: 800 } },
+                        color: { value: '#FF9900' },
+                        shape: { type: 'circle' },
+                        opacity: { value: 0.1, random: false },
+                        size: { value: 3, random: true },
+                        line_linked: {
+                            enable: true,
+                            distance: 150,
+                            color: '#FF9900',
+                            opacity: 0.1,
+                            width: 1
+                        },
+                        move: {
+                            enable: true,
+                            speed: 2,
+                            direction: 'none',
+                            random: false,
+                            straight: false,
+                            out_mode: 'out',
+                            bounce: false
+                        }
+                    },
+                    interactivity: {
+                        detect_on: 'canvas',
+                        events: {
+                            onhover: { enable: true, mode: 'grab' },
+                            onclick: { enable: true, mode: 'push' },
+                            resize: true
+                        },
+                        modes: {
+                            grab: { distance: 140, line_linked: { opacity: 0.3 } },
+                            push: { particles_nb: 4 }
+                        }
+                    },
+                    retina_detect: true
+                });
+            }
+        });
+    </script>
+    
+    <!-- Script for loading progress data from JSON -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load progress data from the JSON file
+            fetch('https://raw.githubusercontent.com/Venilixus/venilixus/main/progress.json')
+                .then(res => res.json())
+                .then(data => {
+                    const langContainer = document.getElementById('language-section');
+                    const courseContainer = document.getElementById('course-section');
+
+                    if (!langContainer || !courseContainer) {
+                        console.error('Could not find language-section or course-section elements');
+                        return;
+                    }
+
+                    // Clear existing content
+                    langContainer.innerHTML = '';
+                    courseContainer.innerHTML = '<h3><i class="fas fa-book"></i> Learning Progress</h3>';
+
+                    // Languages
+                    data.languages.forEach(lang => {
+                        const label = document.createElement('p');
+                        label.textContent = lang.name;
+
+                        const bar = document.createElement('div');
+                        bar.className = 'progress-bar';
+                        if (lang.customHeight) bar.style.height = lang.customHeight;
+
+                        const fill = document.createElement('div');
+                        fill.className = 'progress';
+                        fill.style.width = lang.percentage;
+                        if (lang.color) fill.style.backgroundColor = lang.color;
+
+                        bar.appendChild(fill);
+                        langContainer.appendChild(label);
+                        langContainer.appendChild(bar);
+                    });
+
+                    // Courses
+                    data.courses.forEach(course => {
+                        const wrapper = document.createElement('div');
+                        wrapper.className = 'course-item';
+
+                        const title = document.createElement('h4');
+                        title.textContent = course.name;
+
+                        const progressInfo = document.createElement('div');
+                        progressInfo.className = 'course-progress';
+                        progressInfo.innerHTML = `
+                            <span>${course.status}</span>
+                            <span>${course.percentage}</span>
+                        `;
+
+                        const bar = document.createElement('div');
+                        bar.className = 'progress-bar';
+
+                        const fill = document.createElement('div');
+                        fill.className = 'progress';
+                        fill.style.width = course.percentage;
+                        if (lang.color) fill.style.backgroundColor = course.color;
+
+                        bar.appendChild(fill);
+                        wrapper.appendChild(title);
+                        wrapper.appendChild(progressInfo);
+                        wrapper.appendChild(bar);
+                        courseContainer.appendChild(wrapper);
+                    });
+                })
+                .catch(err => {
+                    console.error('Error loading progress data:', err);
+                    const langContainer = document.getElementById('language-section');
+                    const courseContainer = document.getElementById('course-section');
+                    
+                    if (langContainer) langContainer.textContent = '⚠ Failed to load language data.';
+                    if (courseContainer) courseContainer.textContent = '⚠ Failed to load course data.';
+                });
+        });
+    </script>
+</body>
+</html>
