@@ -1501,7 +1501,7 @@
                         const fill = document.createElement('div');
                         fill.className = 'progress';
                         fill.style.width = course.percentage;
-                        if (lang.color) fill.style.backgroundColor = course.color;
+                        if (course.color) fill.style.backgroundColor = course.color;
 
                         bar.appendChild(fill);
                         wrapper.appendChild(title);
