@@ -31,3 +31,37 @@
     }
   ]
 }
+{
+  "languages": [...your existing languages...],
+  "courses": [...your existing courses...],
+  "learning_roadmap": [
+    {
+      "skill": "Python Advanced",
+      "timeline": "April 2025",
+      "status": "planned", 
+      "description": "Master advanced Python concepts including decorators, generators, and metaprogramming",
+      "resources": "Boot.dev Python track, Real Python tutorials"
+    },
+    {
+      "skill": "Database Design",
+      "timeline": "May 2025",
+      "status": "planned",
+      "description": "Learn SQL optimization, indexes, and advanced database architecture",
+      "resources": "Boot.dev SQL track, PostgreSQL documentation"
+    },
+    {
+      "skill": "AWS Cloud Services",
+      "timeline": "June-July 2025",
+      "status": "planned",
+      "description": "Become proficient with key AWS services for backend development",
+      "resources": "AWS training, hands-on labs"
+    },
+    {
+      "skill": "Docker & Kubernetes",
+      "timeline": "August-September 2025",
+      "status": "planned",
+      "description": "Container orchestration and deployment strategies",
+      "resources": "Docker docs, K8s tutorials"
+    }
+  ]
+}
